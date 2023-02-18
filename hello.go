@@ -32,6 +32,7 @@ func main() {
 		os.Exit((0))
 	default:
 		fmt.Println("Não consigo executar essa ordem ", nome)
+		os.Exit((-1))
 	}
 }
 

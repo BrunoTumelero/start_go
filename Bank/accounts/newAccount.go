@@ -6,32 +6,32 @@ type CurrentAccount struct {
 	Holder  clients.Holder
 	Agency  int
 	Account int
-	balance float64
+	Balance float64
 }
 
-func (c *CurrentAccount) withdraw(value float64) string {
-	getbalance := value > 0 && value <= c.balance
+func (c *CurrentAccount) Withdraw(value float64) string {
+	getbalance := value > 0 && value <= c.Balance
 	if getbalance {
-		c.balance -= value
+		c.Balance -= value
 		return "Saque efetuado com sucesso"
 	} else {
 		return "Saldo insuficiente"
 	}
 }
 
-func (c *CurrentAccount) deposit(valueDeposit float64) (string, float64) {
+func (c *CurrentAccount) Deposit(valueDeposit float64) (string, float64) {
 	if valueDeposit > 0 {
-		c.balance += valueDeposit
-		return "Depósito realizado com sucesso", c.balance
+		c.Balance += valueDeposit
+		return "Depósito realizado com sucesso", c.Balance
 	} else {
-		return "Valor inválido", c.balance
+		return "Valor inválido", c.Balance
 	}
 }
 
-func (c *CurrentAccount) transfer(valueTransfer float64, destination *CurrentAccount) bool {
-	if valueTransfer < c.balance && valueTransfer > 0 {
-		c.balance -= valueTransfer
-		destination.deposit(valueTransfer)
+func (c *CurrentAccount) Transfer(valueTransfer float64, destination *CurrentAccount) bool {
+	if valueTransfer < c.Balance && valueTransfer > 0 {
+		c.Balance -= valueTransfer
+		destination.Deposit(valueTransfer)
 		return true
 	} else {
 		return false
@@ -39,5 +39,5 @@ func (c *CurrentAccount) transfer(valueTransfer float64, destination *CurrentAcc
 }
 
 func (c *CurrentAccount) getBalance() float64 {
-	return c.balance
+	return c.Balance
 }
